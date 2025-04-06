@@ -1,4 +1,4 @@
-ogue Vibe - College Fashion Club Website
+Vogue Vibe - College Fashion Club Website
 A modern, responsive website for Vogue Vibe, a college club dedicated to fashion, photography, and creative events.
 Project Overview
 This repository contains the source code for the Vogue Vibe website, designed to showcase the club's activities, upcoming events, and creative content. The website features a clean, fashion-forward design with smooth animations and full mobile responsiveness.
