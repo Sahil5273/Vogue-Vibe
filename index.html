@@ -4,9 +4,646 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vogue Vibe</title>
-  <link rel="stylesheet" href="styles.css">
+  <!-- <link rel="stylesheet" href="styles.css"> -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
+<style>
+    /* Modern CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #ff3366;
+  --secondary-color: #333;
+  --light-color: #f8f8f8;
+  --dark-color: #111;
+  --accent-color: #00c3ff;
+  --text-color: #333;
+  --transition-speed: 0.3s;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-color: var(--light-color);
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+  transition: all var(--transition-speed) ease;
+}
+
+nav.scrolled {
+  padding: 1rem 5%;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--secondary-color);
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  transition: all var(--transition-speed) ease;
+}
+
+.nav-links a:hover {
+  color: var(--primary-color);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: width var(--transition-speed) ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+  color: white;
+  margin-top: 0;
+  padding: 0 2rem;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+}
+
+.hero-content {
+  position: relative;
+  text-align: center;
+  max-width: 800px;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all var(--transition-speed) ease;
+  box-shadow: 0 5px 15px rgba(255, 51, 102, 0.3);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(255, 51, 102, 0.4);
+  background-color: #ff1a53;
+}
+
+/* Sections */
+.section {
+  padding: 6rem 10%;
+  position: relative;
+}
+
+.section:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: var(--primary-color);
+}
+
+.section p {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  font-size: 1.1rem;
+}
+
+/* Photo Grid */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.photo-grid img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  transition: all var(--transition-speed) ease;
+}
+
+.photo-grid img:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Event Grid */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
+}
+
+.event-card {
+  background-color: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all var(--transition-speed) ease;
+}
+
+.event-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.event-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.event-card h3 {
+  padding: 1.5rem 1.5rem 0.5rem;
+  font-size: 1.4rem;
+}
+
+.event-card p {
+  padding: 0 1.5rem 1rem;
+  color: #777;
+  text-align: left;
+  margin: 0;
+}
+
+.event-card .btn {
+  margin: 0 1.5rem 1.5rem;
+  display: inline-block;
+}
+
+/* Footer */
+footer {
+  background-color: var(--dark-color);
+  color: white;
+  padding: 3rem 5%;
+  text-align: center;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.social-links a {
+  color: white;
+  text-decoration: none;
+  transition: all var(--transition-speed) ease;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.social-links a:hover {
+  color: var(--primary-color);
+}
+
+/* Improved Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), 
+              transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  will-change: opacity, transform;
+}
+
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), 
+              transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  will-change: opacity, transform;
+}
+
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), 
+              transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  will-change: opacity, transform;
+}
+
+.visible {
+  opacity: 1;
+  transform: translate(0);
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .nav-links {
+    gap: 1rem;
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+  }
+  
+  .section {
+    padding: 4rem 5%;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero p {
+    font-size: 1.1rem;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .event-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .section h2 {
+    font-size: 2rem;
+  }
+
+/* Mobile Menu - Hamburger Implementation */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  cursor: pointer;
+  z-index: 200;
+}
+
+.mobile-menu-toggle span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* Improved Mobile Responsive Design */
+@media (max-width: 900px) {
+  .section {
+    padding: 5rem 8%;
+  }
+  
+  .photo-grid {
+    gap: 1.5rem;
+  }
+  
+  .event-grid {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Mobile Navigation */
+  .mobile-menu-toggle {
+    display: flex;
+  }
+  
+  nav {
+    padding: 1rem 5%;
+  }
+  
+  nav.expanded {
+    height: auto;
+  }
+  
+  .nav-links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    z-index: 150;
+    padding: 0;
+    margin-top: 70px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  nav.expanded .nav-links {
+    height: calc(100vh - 70px);
+    padding: 2rem 0;
+  }
+  
+  .nav-links li {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition-delay: 0s;
+  }
+  
+  nav.expanded .nav-links li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Staggered animation for nav items */
+  nav.expanded .nav-links li:nth-child(1) { transition-delay: 0.1s; }
+  nav.expanded .nav-links li:nth-child(2) { transition-delay: 0.2s; }
+  nav.expanded .nav-links li:nth-child(3) { transition-delay: 0.3s; }
+  nav.expanded .nav-links li:nth-child(4) { transition-delay: 0.4s; }
+  nav.expanded .nav-links li:nth-child(5) { transition-delay: 0.5s; }
+  
+  .nav-links a {
+    font-size: 1.2rem;
+    padding: 0.5rem 0;
+  }
+  
+  /* Mobile Hero Section */
+  .hero {
+    height: 90vh;
+    padding: 0 1.5rem;
+    text-align: center;
+    background-attachment: scroll; /* Fix for iOS */
+  }
+  
+  .hero-content {
+    padding: 0 1rem;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+    gap: 1rem;
+  }
+  
+  .btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.9rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Mobile Sections */
+  .section {
+    padding: 4rem 1.5rem;
+  }
+  
+  .section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .section p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    padding: 0 0.5rem;
+  }
+  
+  /* Mobile Photo Grid */
+  .photo-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .photo-grid img {
+    height: 250px;
+  }
+  
+  /* Mobile Event Cards */
+  .event-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .event-card {
+    max-width: 100%;
+  }
+  
+  /* Mobile Footer */
+  footer {
+    padding: 2.5rem 1.5rem;
+  }
+  
+  .social-links {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .section h2 {
+    font-size: 1.75rem;
+  }
+  
+  .event-card h3 {
+    font-size: 1.2rem;
+  }
+  
+  /* Better touch target sizes */
+  .btn, .nav-links a, .social-links a {
+    padding: 0.8rem 1.2rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Fix image spacing */
+  .photo-grid img {
+    height: 220px;
+  }
+}
+
+/* iOS Safari Fixes */
+@supports (-webkit-touch-callout: none) {
+  .hero {
+    background-attachment: scroll;
+  }
+  
+  /* Prevent elastic scrolling issues */
+  html, body {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Dark mode support for users with system preference */
+@media (prefers-color-scheme: dark) {
+  .nav-links {
+    background-color: rgba(20, 20, 20, 0.95);
+  }
+  
+  nav {
+    background-color: rgba(20, 20, 20, 0.95);
+  }
+  
+  .nav-links a {
+    color: #f0f0f0;
+  }
+  
+  .section:nth-child(even) {
+    background-color: #1a1a1a;
+  }
+  
+  .event-card {
+    background-color: #222;
+  }
+  
+  .event-card p {
+    color: #aaa;
+  }
+}
+}
+</style>
 <body>
   <!-- Navbar -->
   <nav>
@@ -17,12 +654,13 @@
       <li><a href="#events">Events</a></li>
       <li><a href="#blog">Blog</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact"></a></li>
     </ul>
   </nav>
 
   <!-- Hero Section -->
-  <section id="home" class="hero" style="background-image: url('pictures/marissa-grootes-O8HHFS7InmA-unsplash.jpg');">
-    <div class="hero-content">
+  <section id="home" class="hero" style="background-image: url('pictures/12.jpg');">
+    <div class="hero-content fade-in">
       <h1>Welcome to Vogue Vibe</h1>
       <p>Where Fashion Meets Creativity</p>
       <div class="cta-buttons">
@@ -34,29 +672,29 @@
 
   <!-- About Section -->
   <section id="about" class="section">
-    <h2>About Us</h2>
-    <p>Vogue Vibe is a college club dedicated to inspiring creativity and style through fashion, photography, and events.</p>
+    <h2 class="slide-in-left">About Us</h2>
+    <p class="slide-in-right">Vogue Vibe is a college club dedicated to inspiring creativity and style through fashion, photography, and events.</p>
     <div class="photo-grid">
-      <img src="pictures/michael-dagonakis-eaiqiA-PoTU-unsplash.jpg" alt="Club Member">
-      <img src="pictures/rhamely-cHSG1RYdeMQ-unsplash.jpg" alt="Club Member">
-      <img src="pictures/sarah-dorweiler-Sy8dsVyiPgs-unsplash.jpg" alt="Club Member">
+      <img src="pictures/3.jpg" alt="Club Member" class="fade-in">
+      <img src="pictures/4.jpg" alt="Club Member" class="fade-in">
+      <img src="pictures/5.jpg" alt="Club Member" class="fade-in">
     </div>
   </section>
 
   <!-- Events Section -->
   <section id="events" class="section">
-    <h2>Upcoming Events</h2>
+    <h2 class="slide-in-left">Upcoming Events</h2>
     <div class="event-grid">
-      <div class="event-card">
-        <img src="pictures/rhamely-Esa-HxseH1I-unsplash.jpg" alt="Event 1">
-        <h3>Fashion Show 2023</h3>
-        <p>October 15, 2023</p>
+      <div class="event-card slide-in-left">
+        <img src="pictures/6.jpg" alt="Event 1">
+        <h3>Fashion Show 2025</h3>
+        <p>October 15, 2025</p>
         <a href="#" class="btn">Learn More</a>
       </div>
-      <div class="event-card">
-        <img src="pictures/marissa-grootes-O8HHFS7InmA-unsplash.jpg" alt="Event 2">
+      <div class="event-card slide-in-right">
+        <img src="pictures/9.jpg" alt="Event 2">
         <h3>Photography Workshop</h3>
-        <p>November 5, 2023</p>
+        <p>November 5, 2025</p>
         <a href="#" class="btn">Learn More</a>
       </div>
     </div>
@@ -64,21 +702,21 @@
 
   <!-- Blog Section -->
   <section id="blog" class="section">
-    <h2>Blog</h2>
-    <p>Check out our latest fashion articles and photography.</p>
+    <h2 class="slide-in-left">Blog</h2>
+    <p class="slide-in-right">Check out our latest fashion articles and photography.</p>
     <div class="photo-grid">
-      <img src="pictures/michael-dagonakis-eaiqiA-PoTU-unsplash.jpg" alt="Blog Post 1">
-      <img src="pictures/rhamely-cHSG1RYdeMQ-unsplash.jpg" alt="Blog Post 2">
-      <img src="pictures/sarah-dorweiler-Sy8dsVyiPgs-unsplash.jpg" alt="Blog Post 3">
+      <img src="pictures/8.jpg" alt="Blog Post 1" class="fade-in">
+      <img src="pictures/9.jpg" alt="Blog Post 2" class="fade-in">
+      <img src="pictures/10.jpg" alt="Blog Post 3" class="fade-in">
     </div>
   </section>
 
   <!-- Contact Section -->
   <section id="contact" class="section">
-    <h2>Contact Us</h2>
-    <p>Reach out to us for collaborations or inquiries.</p>
+    <h2 class="slide-in-left">Contact Us</h2>
+    <p class="slide-in-right">Reach out to us for collaborations or inquiries.</p>
     <div class="photo-grid">
-      <img src="pictures/rhamely-cHSG1RYdeMQ-unsplash.jpg" alt="Contact Image">
+      <img src="pictures/11.jpg" alt="Contact Image" class="fade-in">
     </div>
   </section>
 
@@ -87,11 +725,183 @@
     <div class="social-links">
       <a href="#">Instagram</a>
       <a href="#">Facebook</a>
-      <a href="#">TikTok</a>
+      <a href="#">Youtube</a>
     </div>
-    <p>&copy; 2023 Vogue Vibe. All rights reserved.</p>
+    <p>&copy; 2025 Vogue Vibe. All rights reserved.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+   document.addEventListener('DOMContentLoaded', function() {
+  // Navigation scroll effect
+  const nav = document.querySelector('nav');
+  
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+  
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+  
+  // Improved animation timing with staggered effect
+  function animateElements() {
+    // First animate hero section immediately
+    document.querySelectorAll('.hero .fade-in').forEach(el => {
+      setTimeout(() => {
+        el.classList.add('visible');
+      }, 300);
+    });
+    
+    // Set up intersection observer with better thresholds
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Remove from observation once visible
+          observer.unobserve(entry.target);
+          
+          // Apply staggered delay based on element position
+          const delay = entry.target.dataset.delay || 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+        }
+      });
+    }, observerOptions);
+    
+    // Add staggered delays to elements based on their position in sections
+    document.querySelectorAll('.section').forEach(section => {
+      // Get all animated elements in this section
+      const animatedElements = section.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+      
+      // Add staggered delays
+      animatedElements.forEach((el, index) => {
+        el.dataset.delay = index * 150; // 150ms between each animation
+        observer.observe(el);
+      });
+    });
+    
+    // Add staggered delays for photo grid items
+    document.querySelectorAll('.photo-grid img').forEach((img, index) => {
+      img.dataset.delay = 100 + (index * 200); // 200ms between each image
+      observer.observe(img);
+    });
+    
+    // Add staggered delays for event cards
+    document.querySelectorAll('.event-card').forEach((card, index) => {
+      card.dataset.delay = 150 + (index * 250); // 250ms between each card
+      observer.observe(card);
+    });
+  }
+  
+  // Apply animations with a slight delay after page load
+  // This ensures all content is properly laid out before animations start
+  setTimeout(animateElements, 100);
+  
+  // Optimize performance by disabling animations during window resize
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    document.body.classList.add('resize-animation-stopper');
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      document.body.classList.remove('resize-animation-stopper');
+    }, 400);
+  });
+});
+// Add this to your existing script.js file
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Mobile menu functionality
+  const navElement = document.querySelector('nav');
+  
+  // Create mobile menu toggle button
+  const mobileMenuToggle = document.createElement('div');
+  mobileMenuToggle.className = 'mobile-menu-toggle';
+  mobileMenuToggle.innerHTML = '<span></span><span></span><span></span>';
+  
+  // Insert the toggle button into the nav
+  navElement.insertBefore(mobileMenuToggle, document.querySelector('.nav-links'));
+  
+  // Toggle mobile menu on click
+  mobileMenuToggle.addEventListener('click', function() {
+    navElement.classList.toggle('expanded');
+    
+    // Toggle hamburger to X animation
+    this.classList.toggle('active');
+    
+    // Prevent body scrolling when menu is open
+    if (navElement.classList.contains('expanded')) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  });
+  
+  // Close mobile menu when a link is clicked
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', function() {
+      navElement.classList.remove('expanded');
+      mobileMenuToggle.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+  
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', function(event) {
+    if (navElement.classList.contains('expanded') && 
+        !event.target.closest('nav') && 
+        !event.target.closest('.mobile-menu-toggle')) {
+      navElement.classList.remove('expanded');
+      mobileMenuToggle.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+  
+  // Handle different screen orientations
+  window.addEventListener('orientationchange', function() {
+    // Add slight delay to allow layout calculation
+    setTimeout(() => {
+      if (window.innerWidth > 768) {
+        navElement.classList.remove('expanded');
+        mobileMenuToggle.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }, 200);
+  });
+  
+  // Enhance touch behavior for mobile
+  document.querySelectorAll('.btn, .nav-links a, .event-card, .photo-grid img').forEach(el => {
+    el.addEventListener('touchstart', function() {
+      this.classList.add('touch-active');
+    }, {passive: true});
+    
+    el.addEventListener('touchend', function() {
+      this.classList.remove('touch-active');
+    });
+  });
+});
+  </script>
 </body>
 </html>
